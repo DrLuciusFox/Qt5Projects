@@ -8,13 +8,29 @@ MainWindow::MainWindow(QWidget *parent)
   , ui(new Ui::MainWindow)
 {
   ui->setupUi(this);
-  glay_1= new QGridLayout();
-  ui->tab->setLayout(glay_1);
 
-  plot_1 = new QCustomPlot(ui->frame);
-  glay_1->addWidget(plot_1);
-  plot_1->setSelectionRectMode(QCP::srmZoom);
-  setupSimpleDemo(plot_1);
+  bx = new QGridLayout(ui->dataFrame);
+  t2 = new QGridLayout(ui->tab_2);
+
+//  bx->addWidget(ui->textBrowser, 0, 0, 1, 1);
+//  bx->addWidget(ui->textBrowser_2, 0, 1, 1, 1);
+//  bx->addWidget(ui->textBrowser_3, 1, 0, 1, 1);
+//  bx->addWidget(ui->textBrowser_4, 1, 1, 1, 1);
+
+  t2->addWidget(ui->plot2, 0, 1, 1, 2);
+  t2->addWidget(ui->dataFrame, 0, 3, 1, 1);
+
+  ui->textBrowser->setText("Madam");
+  ui->textBrowser_2->setText("Akshitha");
+  ui->textBrowser_3->setText("Rowdy");
+  ui->textBrowser_4->setText("Baby");
+
+  ui->plot1_1->setSelectionRectMode(QCP::srmZoom);
+  ui->plot2->setSelectionRectMode(QCP::srmZoom);
+  setupSimpleDemo(ui->plot1_1);
+  setupSimpleDemo(ui->plot1_2);
+  setupSimpleDemo(ui->plot2);
+
 }
 
 MainWindow::~MainWindow()
@@ -27,22 +43,22 @@ void MainWindow::setupSimpleDemo(QCustomPlot *customPlot)
   // add two new graphs and set their look:
   customPlot->addGraph();
   customPlot->graph(0)->setPen(QPen(Qt::blue));
-      // line color blue for first graph
+  // line color blue for first graph
   customPlot->graph(0)->setBrush(QBrush(QColor(0, 0, 255, 20)));
-      // first graph will be filled with translucent blue
+  // first graph will be filled with translucent blue
   customPlot->addGraph();
   customPlot->graph(1)->setPen(QPen(Qt::red));
-      // line color red for second graph
+  // line color red for second graph
 
   // generate some points of data (y0 for first, y1 for second graph):
-    QVector<double> x(250), y0(250), y1(250);
-    for (int i=0; i<250; ++i)
+  QVector<double> x(250), y0(250), y1(250);
+  for (int i=0; i<250; ++i)
     {
       x[i] = i;
       y0[i] = exp(-i/150.0)*cos(i/10.0);
-          // exponentially decaying cosine
+      // exponentially decaying cosine
       y1[i] = exp(-i/150.0);
-          // exponential envelope
+      // exponential envelope
     }
 
   customPlot->xAxis2->setVisible(true);
@@ -55,7 +71,6 @@ void MainWindow::setupSimpleDemo(QCustomPlot *customPlot)
   customPlot->graph(1)->rescaleAxes(true);
 
 }
-
 
 
 

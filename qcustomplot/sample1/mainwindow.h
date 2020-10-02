@@ -17,8 +17,8 @@ class MainWindow : public QMainWindow
 public:
   MainWindow(QWidget *parent = nullptr);
   ~MainWindow();
-  QCustomPlot *plot_1;
-  QGridLayout *glay_1;
+  QGridLayout *bx;
+  QGridLayout *t2;
 
 private:
   Ui::MainWindow *ui;
