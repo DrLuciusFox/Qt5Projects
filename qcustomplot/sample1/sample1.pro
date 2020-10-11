@@ -21,6 +21,7 @@ SOURCES += \
     qcustomplot.cpp
 
 HEADERS += \
+    form.h \
     mainwindow.h \
     qcustomplot.h
 
