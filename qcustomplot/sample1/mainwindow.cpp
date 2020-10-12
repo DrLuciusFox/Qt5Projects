@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent)
 
   bx = new QGridLayout(ui->dataFrame);
   t2 = new QGridLayout(ui->tab_2);
+  t3 = new QGridLayout(ui->tab_3);
 
 //  bx->addWidget(ui->textBrowser, 0, 0, 1, 1);
 //  bx->addWidget(ui->textBrowser_2, 0, 1, 1, 1);
@@ -19,6 +20,11 @@ MainWindow::MainWindow(QWidget *parent)
 
   t2->addWidget(ui->plot2, 0, 1, 1, 2);
   t2->addWidget(ui->dataFrame, 0, 3, 1, 1);
+
+  t3->addWidget(ui->frame_1, 0, 0, 1, 1);
+  t3->addWidget(ui->frame_2, 0, 1, 1, 1);
+  t3->addWidget(ui->frame_3, 0, 2, 1, 1);
+
 
   ui->textBrowser->setText("Madam");
   ui->textBrowser_2->setText("Akshitha");
@@ -31,12 +37,41 @@ MainWindow::MainWindow(QWidget *parent)
   setupSimpleDemo(ui->plot1_2);
   setupSimpleDemo(ui->plot2);
 
+  t3f1 = new form(ui->frame_1);
+  t3f2 = new form(ui->frame_2);
+  t3f3 = new form(ui->frame_3);
+
+
 }
 
 MainWindow::~MainWindow()
 {
   delete ui;
 }
+
+void MainWindow::random()
+{
+  if(frameInit)
+  {
+    r0 = ui->frame_2->frameRect(); frameInit = false;
+    c0 = ui->centralwidget->rect();
+    AR = (double)c0.width()/(double)c0.height();
+  }
+  double cwidth = (double)ui->centralwidget->width();
+  double factor = cwidth/(double)c0.width();
+
+  t3f1->update_size(factor);
+  t3f2->update_size(factor);
+  t3f3->update_size(factor);
+
+//  ui->centralwidget->resize();
+//  ui->centralwidget->setGeometry(0,0,cwidth, cwidth/AR);
+
+  qDebug() <<ui->centralwidget->width()<< ", "<<ui->centralwidget->height() ;
+
+
+}
+
 
 void MainWindow::setupSimpleDemo(QCustomPlot *customPlot)
 {
@@ -70,6 +105,11 @@ void MainWindow::setupSimpleDemo(QCustomPlot *customPlot)
   customPlot->graph(0)->rescaleAxes();
   customPlot->graph(1)->rescaleAxes(true);
 
+}
+
+void MainWindow::resizeEvent(QResizeEvent *e)
+{
+  random();
 }
 
 
